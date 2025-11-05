@@ -178,7 +178,7 @@ public:
         root = addNode(root, v);
     }
     
-    void insertContinuous() {
+    void insertMain() {
         cout << "Режим непрерывного ввода (введите 0 для выхода):" << endl;
         int value;
         int count = 0;
@@ -287,7 +287,7 @@ int main() {
                 break;
                 
             case 2:
-                tree.insertContinuous();
+                tree.insertMain();
                 break;
                 
             case 3:
