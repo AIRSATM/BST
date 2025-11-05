@@ -108,11 +108,11 @@ private:
         return newNode;
     }
     
-    void inOrderTraversal(Node* current) {
+    void reversePreOrderTraversal(Node* current) {
         if (current != nullptr) {
-            inOrderTraversal(current->left);
             cout << current->value << " ";
-            inOrderTraversal(current->right);
+            reversePreOrderTraversal(current->right);
+            reversePreOrderTraversal(current->left);
         }
     }
     
@@ -227,9 +227,9 @@ public:
         return maxNode ? maxNode->value : -1;
     }
     
-    void inOrder() {
-        cout << "ЛКП: ";
-        inOrderTraversal(root);
+    void reversePreOrder() {
+        cout << "КПЛ: ";
+        reversePreOrderTraversal(root);
         cout << endl;
     }
     
@@ -286,7 +286,7 @@ int main() {
     do {
         cout << "\n1.добавить_одно 2.добавить_несколько 3.добавить_непрерывно";
         cout << "\n4.найти 5.удалить 6.мин 7.макс 8.показать";
-        cout << "\n9.ЛКП 10.по_уровням 11.листья 12.копия 0.выход\n";
+        cout << "\n9.КПЛ 10.по_уровням 11.листья 12.копия 0.выход\n";
         cin >> choice;
         
         switch(choice) {
@@ -332,7 +332,7 @@ int main() {
                 break;
                 
             case 9:
-                tree.inOrder();
+                tree.reversePreOrder();
                 break;
                 
             case 10:
