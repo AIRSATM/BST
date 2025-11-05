@@ -121,11 +121,11 @@ private:
         return newNode;
     }
     
-    void reversePreOrderTraversal(Node* current) {
+    void KPL(Node* current) {
         if (current != nullptr) {
             cout << current->value << " ";
-            reversePreOrderTraversal(current->right);
-            reversePreOrderTraversal(current->left);
+            KPL(current->right);
+            KPL(current->left);
         }
     }
     
@@ -218,7 +218,7 @@ public:
     
     void reversePreOrder() {
         cout << "КПЛ: ";
-        reversePreOrderTraversal(root);
+        KPL(root);
         cout << endl;
     }
     
