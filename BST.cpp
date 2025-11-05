@@ -1,15 +1,28 @@
 #include <iostream>
 #include <queue>
 #include <algorithm>
-#include <sstream>
 using namespace std;
 
-struct Node {
+class Node {
+private:
     int value;
     Node* left;
     Node* right;
     
+public:
     Node(int v) : value(v), left(nullptr), right(nullptr) {}
+    
+    ~Node() = default;
+    
+    int getValue() const { return value; }
+    Node* getLeft() const { return left; }
+    Node* getRight() const { return right; }
+    
+    void setValue(int v) { value = v; }
+    void setLeft(Node* l) { left = l; }
+    void setRight(Node* r) { right = r; }
+    
+    friend class SearchTree;
 };
 
 class SearchTree {
@@ -165,30 +178,6 @@ public:
         root = addNode(root, v);
     }
     
-    void insertMultiple() {
-        cout << "Введите числа через пробел (для окончания введите 0): ";
-        string line;
-        cin.ignore();
-        getline(cin, line);
-        
-        stringstream ss(line);
-        int value;
-        int count = 0;
-        
-        while (ss >> value) {
-            if (value == 0) break;
-            insert(value);
-            count++;
-            cout << "Добавлено: " << value << endl;
-        }
-        
-        if (count > 0) {
-            cout << "Всего добавлено: " << count << " элементов" << endl;
-        } else {
-            cout << "Ничего не добавлено" << endl;
-        }
-    }
-    
     void insertContinuous() {
         cout << "Режим непрерывного ввода (введите 0 для выхода):" << endl;
         int value;
@@ -284,9 +273,9 @@ int main() {
     int choice, value;
     
     do {
-        cout << "\n1.добавить_одно 2.добавить_несколько 3.добавить_непрерывно";
-        cout << "\n4.найти 5.удалить 6.мин 7.макс 8.показать";
-        cout << "\n9.КПЛ 10.по_уровням 11.листья 12.копия 0.выход\n";
+        cout << "\n1.добавить_одно 2.добавить_непрерывно";
+        cout << "\n3.найти 4.удалить 5.мин 6.макс 7.показать";
+        cout << "\n8.КПЛ 9.по_уровням 10.листья 11.копия 0.выход\n";
         cin >> choice;
         
         switch(choice) {
@@ -298,52 +287,47 @@ int main() {
                 break;
                 
             case 2:
-                tree.insertMultiple();
-                tree.display();
-                break;
-                
-            case 3:
                 tree.insertContinuous();
                 break;
                 
-            case 4:
+            case 3:
                 cout << "найти: ";
                 cin >> value;
                 cout << (tree.contains(value) ? "есть" : "нет") << endl;
                 break;
                 
-            case 5:
+            case 4:
                 cout << "удалить: ";
                 cin >> value;
                 tree.remove(value);
                 tree.display();
                 break;
                 
-            case 6:
+            case 5:
                 cout << "мин: " << tree.getMinValue() << endl;
                 break;
                 
-            case 7:
+            case 6:
                 cout << "макс: " << tree.getMaxValue() << endl;
                 break;
                 
-            case 8:
+            case 7:
                 tree.display();
                 break;
                 
-            case 9:
+            case 8:
                 tree.reversePreOrder();
                 break;
                 
-            case 10:
+            case 9:
                 tree.levelOrder();
                 break;
                 
-            case 11:
+            case 10:
                 tree.leaves();
                 break;
                 
-            case 12: {
+            case 11: {
                 SearchTree copy = tree;
                 cout << "создана копия:" << endl;
                 copy.display();
