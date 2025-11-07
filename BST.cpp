@@ -29,33 +29,39 @@ class SearchTree {
 private:
     Node* root;
     
-    Node* addNode(Node* current, int v) {
-        if (current == nullptr) {
-            return new Node(v);
-        }
+    Node* addNode(Node* root, int v) {
+        if (root == nullptr) return new Node(v);
         
-        if (v < current->value) {
-            current->left = addNode(current->left, v);
-        } else if (v > current->value) {
-            current->right = addNode(current->right, v);
+        Node* current = root;
+        while (true) {      
+            if (v < current->value) {
+                if (current->left == nullptr) {
+                    current->left = new Node(v);
+                    break;
+                } else {
+                    current = current->left;
+                }
+            } else if (v > current->value) {
+                if (current->right == nullptr) {
+                    current->right = new Node(v);
+                    break;
+                } else {
+                    current = current->right;
+                }
+            } else break;
         }
-        
-        return current;
+        return root;
     }
-    
+
     bool findNode(Node* current, int v) {
-        if (current == nullptr) {
-            return false;
+        while (current != nullptr) { 
+            if (v == current->value) return true;
+            else if (v < current->value) current = current->left;
+            else current = current->right;
         }
-        
-        if (v == current->value) {
-            return true;
-        } else if (v < current->value) {
-            return findNode(current->left, v);
-        } else {
-            return findNode(current->right, v);
-        }
+        return false;
     }
+
     
     Node* getMin(Node* current) {
         while (current && current->left != nullptr) {
