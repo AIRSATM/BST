@@ -222,7 +222,7 @@ public:
         return maxNode ? maxNode->value : -1;
     }
     
-    void reversePreOrder() {
+    void FKPL() {
         cout << "КПЛ: ";
         KPL(root);
         cout << endl;
@@ -322,7 +322,7 @@ int main() {
                 break;
                 
             case 8:
-                tree.reversePreOrder();
+                tree.FKPL();
                 break;
                 
             case 9:
